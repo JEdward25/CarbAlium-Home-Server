@@ -1,14 +1,23 @@
-# ❄️ CarbAlium — Servidor Cloud & NAS Pessoal em Smartphone Android
+# ❄️ CarbAlium — Servidor Cloud & NAS Pessoal Doméstico em Smartphone Android
 
-<img width="100" height="100" alt="CarbAlium_Logo2" src="https://github.com/user-attachments/assets/4d09b73d-ad0c-4a8c-8d27-6de48c94fcec" />
+<div align="center">
+  <img width="100" height="100" alt="CarbAlium_Logo2" src="https://github.com/user-attachments/assets/4d09b73d-ad0c-4a8c-8d27-6de48c94fcec" />
+</div>
 
-O **CarbAlium** é uma arquitetura de nuvem pessoal privada e auto-hospedada (*self-hosted*), projetada para transformar um smartphone Android (testado em **Redmi 13C 4G 8GB 256GB / HyperOS 2.0.209.0 / Android 15 AP3A.240905.015.A2**) em um servidor de arquivos 24/7 acessível de qualquer lugar com criptografia ponta a ponta, transferência via navegador, montagem de unidade de rede (WebDAV) e sincronização bidirecional automática.
+<div align="center"> 
+
+  O **CarbAlium** é uma arquitetura de nuvem pessoal privada e auto-hospedada (*self-hosted*), projetada para transformar um smartphone Android (testado em **Redmi 13C 4G 8GB 256GB / HyperOS 2.0.209.0 / Android 15 AP3A.240905.015.A2**) em um servidor de arquivos 24/7 acessível de qualquer lugar com criptografia ponta a ponta, transferência via navegador, montagem de unidade de rede (WebDAV) e sincronização bidirecional automática. 
+
+  O nome do servidor é uma junção do nome de elementos químicos encontrados no nome do modelo do celular em que foi implementado: Redmi 13C, com processador Helio C85. 
+  "_C_" para Carbono, com prefixo _Carb_ , o número 13 para o Alumínio na tabela periódica, com seu símbolo _Al_ para o infixo, e "Helium", do Latim, para o Hélio, produz o sufixo _ium_. Realizando a junção, temos o _Carb_ + _Al_ + _ium_ (CarbAlium).
+  
+</div>
 
 ---
 
 ## 🏗️ Arquitetura e Stack Tecnológica
 
-A comunicação entre o servidor e os clientes ocorre exclusivamente através de uma rede privada virtual em malha (*Mesh VPN*), eliminando a necessidade de abrir portas no roteador (*Port Forwarding*), lidar com CGNAT ou depender de IPs dinâmicos de operadoras.
+&emsp; A comunicação entre o servidor e os clientes ocorre exclusivamente através de uma rede privada virtual em malha (*Mesh VPN*), eliminando a necessidade de abrir portas no roteador (*Port Forwarding*), lidar com CGNAT ou depender de IPs dinâmicos de operadoras.
 
 ```text
 +-------------------------------------------------------------------+
@@ -44,11 +53,11 @@ A comunicação entre o servidor e os clientes ocorre exclusivamente através de
 
 ## 📱 Parte 1: Configuração do Dispositivo Servidor (Android / HyperOS)
 
-Para garantir que o servidor permaneça online de forma ininterrupta (inclusive durante a madrugada e ciclos de carregamento na tomada), siga as etapas abaixo na ordem apresentada.
+&emsp; Para garantir que o servidor permaneça online de forma ininterrupta (inclusive durante a madrugada e ciclos de carregamento na tomada), siga as etapas abaixo na ordem apresentada.
 
 ### 1.1. Blindagem de Energia, Memória e Processos (HyperOS / Android)
 
-Sistemas Android modernos — especialmente o HyperOS/MIUI — encerram processos em segundo plano para economizar bateria. Configure os aplicativos **Termux**, **Tailscale** e **Syncthing-Fork** com as seguintes regras:
+&emsp; Sistemas Android modernos — especialmente o HyperOS/MIUI — encerram processos em segundo plano para economizar bateria. Configure os aplicativos **Termux**, **Tailscale** e **Syncthing-Fork** com as seguintes regras:
 
 1. **Permissões individuais dos 3 apps** (Segure o ícone do app > *Informações do app*):
    * **Inicialização automática:** `Ativada`
@@ -108,7 +117,7 @@ Sistemas Android modernos — especialmente o HyperOS/MIUI — encerram processo
 
 #### Comando de Inicialização (Produção com Dois Níveis de Acesso)
 
-O comando abaixo define o nome fixo do servidor (`--name CarbAlium`), cria duas contas distintas (`admin` e `cofre`), restringe a raiz `/` apenas ao administrador, libera `/cofre` para ambos os usuários, ativa o suporte WebDAV (`--dav-auth`) e mantém um laço de autorrecuperação (`while true`) caso o processo seja interrompido:
+&emsp; O comando abaixo define o nome fixo do servidor (`--name CarbAlium`), cria duas contas distintas (`admin` e `cofre`), restringe a raiz `/` apenas ao administrador, libera `/cofre` para ambos os usuários, ativa o suporte WebDAV (`--dav-auth`) e mantém um laço de autorrecuperação (`while true`) caso o processo seja interrompido:
 
 ```bash
 while true; do copyparty --name CarbAlium -a admin:SUA_SENHA_ADMIN -a cofre:SUA_SENHA_COFRE -v /sdcard/CarbAlium:/:rwmd,admin -v /sdcard/CarbAlium/cofre:/cofre:rwmd,admin,cofre --dav-auth; sleep 2; done
