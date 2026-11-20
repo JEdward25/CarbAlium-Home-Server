@@ -190,12 +190,3 @@ while true; do copyparty --name CarbAlium -a admin:SUA_SENHA_ADMIN -a cofre:SUA_
 | **Copyparty (Cofre)** | `3923` | HTTP | `http://<IP_TAILSCALE>:3923/cofre` |
 | **Copyparty (WebDAV)** | `3923` | HTTP/DAV | `\\<IP_TAILSCALE>@3923` (Windows Explorer) |
 | **Syncthing-Fork** | `22000` | TCP/QUIC | `tcp://<IP_TAILSCALE>:22000, dynamic` |
-
----
-
-## 🛠️ Solução de Problemas Comuns (Troubleshooting)
-
-* **`ERR_SSL_PROTOCOL_ERROR` no navegador do cliente:** O navegador está redirecionando automaticamente para `https://`. Digite explicitamente `http://` ou desative a opção *Sempre usar conexões seguras* no navegador.
-* **`ERR_ADDRESS_UNREACHABLE`:** Verifique se o Tailscale está conectado em ambos os dispositivos e se não há nenhum *Exit Node* ativado por engano no cliente. Em aparelhos HyperOS, verifique se há *Apps Duplos* ativos interferindo na tabela de rotas VPN.
-* **Syncthing mostra "Desconectado" e a opção "Interface web" fica cinza:** O serviço em segundo plano foi pausado pela economia de bateria do Android. Desmarque *Respeitar economia de bateria* nas condições de execução do app e defina a bateria como *Sem restrições* no sistema.
-* **Pasta `/cofre` abre sem solicitar senha:** Confirme se o nome da pasta física no celular (`/sdcard/CarbAlium/cofre`) possui exatamente a mesma grafia (maiúsculas/minúsculas) declarada na flag `-v` do comando do Copyparty, e teste o acesso em uma aba anônima para ignorar cookies de sessões anteriores.
