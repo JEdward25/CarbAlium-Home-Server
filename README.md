@@ -1,6 +1,6 @@
 # ☁️ CarbAlium — Servidor Cloud & NAS Pessoal em Smartphone Android
 
-O **CarbAlium** é uma arquitetura de nuvem pessoal privada e auto-hospedada (*self-hosted*), projetada para transformar um smartphone Android (testado em **Redmi 13C / HyperOS**) em um servidor de arquivos 24/7 acessível de qualquer lugar com criptografia ponta a ponta, transferência via navegador, montagem de unidade de rede (WebDAV) e sincronização bidirecional automática.
+O **CarbAlium** é uma arquitetura de nuvem pessoal privada e auto-hospedada (*self-hosted*), projetada para transformar um smartphone Android (testado em **Redmi 13C 4G 8GB 256GB / HyperOS 2.0.209.0**) em um servidor de arquivos 24/7 acessível de qualquer lugar com criptografia ponta a ponta, transferência via navegador, montagem de unidade de rede (WebDAV) e sincronização bidirecional automática.
 
 ---
 
