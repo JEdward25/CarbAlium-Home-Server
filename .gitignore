@@ -1,0 +1,6 @@
+# Credenciais locais do CarbAlium
+.env
+
+# Arquivos de log e temporários
+*.log
+.hist/
