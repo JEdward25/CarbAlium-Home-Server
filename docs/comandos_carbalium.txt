@@ -1,0 +1,89 @@
+========================================================================
+PROJETO CARBALIUM - COMANDOS E CONFIGURAÇÕES DE REFERÊNCIA
+Hardware Servidor: Redmi 13C (HyperOS)
+Clientes: PC (Windows) e POCO Pad (HyperOS)
+========================================================================
+
+------------------------------------------------------------------------
+1. GERENCIAMENTO DE ENERGIA E PROCESSOS (TERMUX / ANDROID)
+------------------------------------------------------------------------
+
+# Impedir o sono profundo da CPU no Termux (Wake-Lock):
+termux-wake-lock
+
+# Desativar o limite de processos filhos/fantasmas via ADB (executar no PC com USB depuração ativa):
+adb shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647"
+
+
+------------------------------------------------------------------------
+2. COMANDOS DE INICIALIZAÇÃO DO COPYPARTY (TERMUX)
+------------------------------------------------------------------------
+
+# [Versão 1] Inicialização básica com loop de autorrecuperação (sem senha):
+while true; do copyparty -v /caminho/da/sua/pasta:/:rw --dav-auth; sleep 2; done
+
+# [Versão 2] Usuário único protegendo apenas a subpasta /Cofre (execução direta):
+copyparty -a seu_usuario:sua_senha -v /sdcard/CarbAlium:/:rwmd -v /sdcard/CarbAlium/Cofre:/Cofre:rwmd,seu_usuario --dav-auth
+
+# [Versão 3] Usuário único protegendo /Cofre com loop de autorrecuperação:
+while true; do copyparty -a seu_usuario:sua_senha -v /sdcard/CarbAlium:/:rwmd -v /sdcard/CarbAlium/Cofre:/Cofre:rwmd,seu_usuario --dav-auth; sleep 2; done
+
+# [Versão 4] Nome fixo do servidor (--name CarbAlium) e ajuste de minúsculas (/cofre):
+copyparty --name CarbAlium -a seu_usuario:sua_senha -v /sdcard/CarbAlium:/:rwmd -v /sdcard/CarbAlium/cofre:/cofre:rwmd,seu_usuario --dav-auth
+
+# [Versão 5 - FINAL] Dois níveis de acesso (admin e cofre) com senhas distintas (execução direta):
+copyparty --name CarbAlium -a admin:senha_admin -a cofre:senha_cofre -v /sdcard/CarbAlium:/:rwmd,admin -v /sdcard/CarbAlium/cofre:/cofre:rwmd,admin,cofre --dav-auth
+
+# [Versão 5 - FINAL COM LOOP] Comando completo de produção com reinício automático:
+while true; do copyparty --name CarbAlium -a admin:senha_admin -a cofre:senha_cofre -v /sdcard/CarbAlium:/:rwmd,admin -v /sdcard/CarbAlium/cofre:/cofre:rwmd,admin,cofre --dav-auth; sleep 2; done
+
+# [Observação - Rota Alternativa] Para forçar caixa de senha imediata sem usar /?login:
+# Substituir "-v /sdcard/CarbAlium:/:rwmd,admin" por "-v /sdcard/CarbAlium:/geral:rwmd,admin"
+
+
+------------------------------------------------------------------------
+3. ENDEREÇOS DE REDE, PORTAS E PARÂMETROS DE CLIENTES
+------------------------------------------------------------------------
+
+# IP fixo do servidor na rede mesh Tailscale:
+100.64.239.18
+
+# Acesso Web - Copyparty (Interface principal):
+http://100.64.239.18:3923
+
+# Acesso Web - Copyparty (Forçar abertura imediata da tela de login na raiz):
+http://100.64.239.18:3923/?login
+
+# Acesso Web - Copyparty (Acesso direto e exclusivo à pasta Cofre):
+http://100.64.239.18:3923/cofre
+
+# Mapeamento de Unidade de Rede no Windows Explorer (WebDAV - Unidade K:):
+\\100.64.239.18@3923
+
+# Syncthing-Fork - Endereço manual do dispositivo servidor (via Tailscale):
+tcp://100.64.239.18:22000, dynamic
+
+# Syncthing-Fork - Endereço manual via rede local (exemplo Wi-Fi):
+tcp://192.168.1.12:22000, dynamic
+
+
+------------------------------------------------------------------------
+4. COMANDOS DE DIAGNÓSTICO E MANUTENÇÃO NO TERMUX
+------------------------------------------------------------------------
+
+# Verificar histórico da sessão atual na RAM e salvar em disco:
+history | grep -E "copyparty|while|termux"
+history -a
+
+# Ler histórico salvo e arquivos de inicialização:
+cat ~/.bash_history | grep -E "copyparty|while|termux"
+cat ~/.bashrc ~/.profile 2>/dev/null
+cat ~/*.sh ~/.termux/boot/* 2>/dev/null
+cat ~/.config/copyparty/*.conf ~/.termux/termux.properties 2>/dev/null
+
+# Verificar processo ativo em tempo real na memória:
+ps -ef | grep copyparty
+for p in /proc/[0-9]*; do tr '\0' ' ' < "$p/cmdline" 2>/dev/null | grep -i copyparty && echo ""; done
+
+# Localizar logs, scripts e pastas ocultas (.hist) do servidor:
+ls -la ~ && find ~ /sdcard -maxdepth 3 \( -name "*.log" -o -name "*.sh" -o -name ".hist" -o -name "*copyparty*" \) 2>/dev/null
