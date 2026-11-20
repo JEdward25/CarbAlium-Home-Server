@@ -45,7 +45,7 @@
 
 ### Componentes Principais
 * **[Termux](https://termux.dev/):** Ambiente terminal Linux para Android responsável por hospedar o servidor web.
-* **[Copyparty](https://github.com/9001/copyparty):** Servidor leve de arquivos em Python com suporte a HTTP, WebDAV, controle de acesso granular por pasta e interface web responsiva.
+* **[Copyparty](https://github.com/9001/copyparty):** Servidor/Interface leve de arquivos em Python com suporte a HTTP, WebDAV, controle de acesso granular por pasta e interface web responsiva.
 * **[Syncthing-Fork](https://github.com/Catfriend1/syncthing-android):** Motor de sincronização contínua ponto a ponto (*P2P*) entre pastas locais dos dispositivos.
 * **[Tailscale](https://tailscale.com/):** Rede Mesh VPN baseada em WireGuard que atribui um endereço IP fixo (`100.x.y.z`) para cada dispositivo da rede.
 
