@@ -47,6 +47,7 @@ while true; do
         -a "$COFRE_USER:$COFRE_PASS" \
         -v "$BASE_DIR":/:rwmd,"$ADMIN_USER" \
         -v "$COFRE_DIR":/cofre:rwmd,"$ADMIN_USER","$COFRE_USER" \
+        -e2ds -e2ts \
         --dav-auth
 
     echo "[CarbAlium] Processo interrompido. Reiniciando em 2 segundos..."
