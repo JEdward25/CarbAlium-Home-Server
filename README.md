@@ -4,6 +4,8 @@
   <img width="100" height="100" alt="CarbAlium_Logo2" src="https://github.com/user-attachments/assets/4d09b73d-ad0c-4a8c-8d27-6de48c94fcec" />
 </div>
 
+_version 5.3 (Nov 23, 2026)_
+
 <div align="center"> 
 
   O **CarbAlium** é uma arquitetura de nuvem pessoal privada e auto-hospedada (*self-hosted*), projetada para transformar um smartphone Android (testado em **Redmi 13C 4G 8GB 256GB / HyperOS 2.0.209.0 / Android 15 AP3A.240905.015.A2**) em um servidor de arquivos 24/7 acessível de qualquer lugar com criptografia ponta a ponta, transferência via navegador, montagem de unidade de rede (WebDAV) e sincronização bidirecional automática. 
